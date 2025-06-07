@@ -9,7 +9,7 @@
     border: solid red;
 }
 
-.carousel-track {
+#carousel-track {
     display: flex;
     width: 200vw;
     height: 100%;
