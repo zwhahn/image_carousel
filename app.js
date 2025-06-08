@@ -1,13 +1,12 @@
 var currentIndex = 0;
 
-const carouselTrack = document.getElementById("carousel-track");
-
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 
 leftBtn.addEventListener("click", () => scroll('left'));
 rightBtn.addEventListener("click", () => scroll('right'));
-// carouselTrack.style.transform = 'translateX(-50vw)';
+
+//highlight dot on creation
 highlightDot()
 
 function scroll(direction) {
@@ -18,17 +17,22 @@ function scroll(direction) {
         if (currentIndex > 3) {
             currentIndex = 0;
         }
-        carouselTrack.style.transform = `translateX(-${50 * currentIndex}vw)`;
     } if (direction === "left") {
         console.log("scrolled left");
         currentIndex--;
         if (currentIndex < 0) {
             currentIndex = 3;
         }
-        carouselTrack.style.transform = `translateX(-${50 * (currentIndex)}vw)`;
+        
     } 
-    highlightDot()
+    translateCarouselTrack();
+    highlightDot();
 };
+
+function translateCarouselTrack() {
+    const carouselTrack = document.getElementById("carousel-track");
+    carouselTrack.style.transform = `translateX(-${50 * currentIndex}vw)`;
+}
 
 function highlightDot() {
     const carouselDots = document.querySelector('.carousel-dots');
@@ -43,3 +47,13 @@ function highlightDot() {
     const selectedDot = carouselDots.querySelector(selector);
     selectedDot.style.backgroundColor = "black"
 }
+
+const dots = document.querySelectorAll(".dot");
+
+dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+        currentIndex = parseInt(dot.dataset.index);
+        translateCarouselTrack();
+        highlightDot();
+    });
+});
