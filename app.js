@@ -57,3 +57,5 @@ dots.forEach(dot => {
         highlightDot();
     });
 });
+
+setInterval(() => scroll("right"), 5000);
